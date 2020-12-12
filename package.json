@@ -1,0 +1,35 @@
+{
+    "name": "chat-app",
+    "version": "1.0.0",
+    "description": "This is a simple chat-app. It is created by using html, css, js, socket.io, nodejs & mongodb. By using this app we can do simple one to one and group chat.",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server/server.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/peeyushjss/chat-app.git"
+    },
+    "keywords": [
+        "chat-app",
+        "socket.io",
+        "nodejs",
+        "js",
+        "mongodb"
+    ],
+    "author": "Peeyush Kumar",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/peeyushjss/chat-app/issues"
+    },
+    "homepage": "https://github.com/peeyushjss/chat-app#readme",
+    "dependencies": {
+        "axios": "^0.21.0",
+        "express": "^4.17.1",
+        "lodash": "^4.17.20",
+        "moment": "^2.29.1",
+        "mongoose": "^5.11.7",
+        "socket.io": "^3.0.4"
+    }
+}
