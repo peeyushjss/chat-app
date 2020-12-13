@@ -3,30 +3,31 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Join | ChatApp</title>
+    <title>ChatApp</title>
     <meta name="viewport" content="width=device-width, inital-scale=1, user-scalable=no">
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 
-<body class="centered-form">
-    <div class="centered-form__form">
-        <form action="/chat.html">
-            <div class="form-field">
-                <h3>Join Chat</h3>
-            </div>
-            <div class="form-field">
-                <label>Display name</label>
-                <input type="text" name="name" autofocus>
-            </div>
-            <div class="form-field">
-                <label>Room name</label>
-                <input type="text" name="room" autofocus>
-            </div>
-            <div class="form-field">
-                <button>Join</button>
-            </div>
-        </form>
+<body>
+
+    <div>
+        <div style="float: left; padding: 10em 25em;">
+            <button type="button" onclick="privateChat();">Private Chat!</button>
+        </div>
+        <div style="padding: 10em;">
+            <button type="button" onclick="groupChat();">Group Chat!</button>
+        </div>
     </div>
+
+    <script>
+        function groupChat() {
+            location.href = "/groupChat.html";
+        }
+
+        function privateChat() {
+            location.href = "/privateChat.html";
+        }
+    </script>
 
 </body>
 

@@ -1,6 +1,8 @@
 'use strict';
 
-let socket = io();
+let socket = io(),
+    sender = "",
+    receiver = "";
 
 function scrollToBottom() {
     let messages = document.querySelector('#messages').lastElementChild;
@@ -18,7 +20,7 @@ socket.on('connect', function() {
         } else {
             console.log('No Error');
         }
-    })
+    });
 });
 
 socket.on('disconnect', function() {
@@ -54,12 +56,13 @@ socket.on('newMessage', function(message) {
     scrollToBottom();
 });
 
-document.querySelector('#submit-btn').addEventListener('click', function(e) {
-    e.preventDefault();
-
-    socket.emit("createMessage", {
-        text: document.querySelector('input[name="message"]').value
-    }, function() {
-        document.querySelector('input[name="message"]').value = '';
-    })
-});
+if (document.querySelector('#submit-btn')) {
+    document.querySelector('#submit-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        socket.emit("createMessage", {
+            text: document.querySelector('input[name="message"]').value
+        }, function() {
+            document.querySelector('input[name="message"]').value = '';
+        });
+    });
+}

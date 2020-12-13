@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Private Chat | ChatApp</title>
+    <meta name="viewport" content="width=device-width, inital-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body class="chat">
+    <div class="chat__sidebar">
+        <h3>People</h3>
+        <div id="users"></div>
+    </div>
+
+    <div style="margin: 25px;">
+        <form onsubmit="return enterName();">
+            <input id="name" placeholder="Enter name" style="margin: 10px;">
+            <input type="submit" style="margin: 10px;">
+        </form>
+    </div>
+
+    <div style="margin: 25px;" id="msgDiv">
+        <form onsubmit="return sendMessage();">
+            <input id="message" placeholder="Enter message" style="margin: 10px;">
+            <input type="submit" style="margin: 10px;">
+        </form>
+    </div>
+
+    <div class="chat__main">
+        <ul id="messages" class="chat__messages"></ul>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/js/privateChat.js"></script>
+    <script type="text/javascript" src="/js/libs/moment.js"></script>
+    <script type="text/javascript" src="/js/libs/mustache.js"></script>
+</body>
+
+</html>

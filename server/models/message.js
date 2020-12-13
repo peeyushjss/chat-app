@@ -40,8 +40,12 @@ MsgSchema.statics.createMsgs = function(requestData, callback) {
 };
 
 /* query for fetching all messages from database */
-MsgSchema.statics.getAllMsgs = function(callback) {
-    this.find({}, callback);
+MsgSchema.statics.getAllMsgs = function(filter, callback) {
+    if (filter) {
+        this.find(filter, callback);
+    } else {
+        this.find({}, callback);
+    }
 };
 
 /* query for updating read value if message seen by user in database */

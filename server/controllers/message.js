@@ -17,9 +17,15 @@ exports.createMsg = (req, res, next) => {
     });
 };
 
-/* Business logic for fetching all messages from database */
+/* Business logic for fetching all messages and all latest messages from database */
 exports.getAllMsg = (req, res) => {
-    message.getAllMsgs((err, messages) => {
+    let filter = req.query.message;
+    if (filter && filter.toLowerCase() === "latest") {
+        filter = {
+            read: false
+        }
+    }
+    message.getAllMsgs(filter, (err, messages) => {
         if (!err) {
             res.json({ status: true, result: messages });
         } else {

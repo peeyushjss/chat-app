@@ -55,11 +55,12 @@ io.on('connection', (socket) => {
         callback();
     });
 
+    /* handle when createMessage event trigger to create a new messgae */
     socket.on('createMessage', (message, callback) => {
         let user = users.getUser(socket.id);
-
-        if (user && isRealString(message.text)) {
+        if (user && message && isRealString(message.text)) {
             io.to(user.room).emit('newMessage', generateMessage(user.name, message.text));
+            /* code for saving message in the database */
             axios.post('http://localhost:' + port + '/api/messages', {
                 "sender": user.name,
                 "receiver": "",
@@ -78,6 +79,36 @@ io.on('connection', (socket) => {
         callback('This is the server:');
     });
 
+    /* when a new user is created in case of one to one chat */
+    socket.on("user_connected", function(username) {
+        users[username] = socket.id;
+        /* socket ID will be used to send message to individual person */
+        io.emit("user_connected", username);
+    });
+
+    /* listen from client inside IO "connection" event */
+    socket.on("send_message", function(data) {
+        /* send event to receiver */
+        let socketId = users[data.receiver];
+        io.to(socketId).emit("new_message", data);
+        /* code for saving message in the database */
+        axios.post('http://localhost:' + port + '/api/messages', {
+            "sender": data.sender,
+            "receiver": data.receiver,
+            "room": "",
+            "message": data.message,
+            "createdAt": moment().format('L'),
+            "read": false
+        }).then(function(response) {
+            if (response.status === 200) {
+                console.log(" Messgae saved successfully in database! ");
+            } else {
+                console.log(" Getting error at the time message saving in database! ");
+            }
+        });
+    });
+
+    /* Handle when user is disconnected */
     socket.on('disconnect', () => {
         let user = users.removeUser(socket.id);
         if (user) {
